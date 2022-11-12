@@ -53,11 +53,10 @@ MDScreen:
                     multiline: True
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4}
                     
-                MDRectangleFlatIconButton
-                    icon: "send"
-                    text: "Получить"
+                MDTextField
+                    id: fg
+                    multiline: True
                     pos_hint: {'center_x': 0.5, 'center_y': 0.2}
-                    on_press:app.encode()
                     
                 MDRectangleFlatIconButton
                     icon: "send"
@@ -73,24 +72,23 @@ MDScreen:
             MDNavigationDrawerMenu:
 
                 MDNavigationDrawerHeader:
-                    title: "Header title"
+                    title: "Secret"
                     title_color: "#4a4939"
-                    text: "Header text"
+                    text: "By Pytho3"
                     spacing: "4dp"
                     padding: "12dp", 0, 0, "56dp"
 
                 MDNavigationDrawerLabel:
-                    text: "Mail"
-
-                DrawerClickableItem:
-                    icon: "gmail"
-                    right_text: "+99"
-                    text_right_color: "#4a4939"
-                    text: "Inbox"
+                    text: "Encryption methods"
 
                 DrawerClickableItem:
                     icon: "send"
-                    text: "Outbox"
+                    text_right_color: "#4a4939"
+                    text: "Asymmetric method"
+
+                DrawerClickableItem:
+                    icon: "send"
+                    text: "RSA"
 
                 MDNavigationDrawerDivider:
 
@@ -114,18 +112,11 @@ class Example(MDApp):
 
     def btn_encode(self):  # шифрование
         self.str_encoded = cryptocode.encrypt(self.root.ids.data.text, "wow")
-        print(self.str_encoded)
-
-    def encode(self):  # шифрование
         self.root.ids.dt.text = self.str_encoded
 
     def btn_decode(self):
         self.str_decoded = cryptocode.decrypt(self.str_encoded, "wow")
-        print(self.str_decoded)
-
-    def decode(self):  # шифрование
-        self.root.ids.dt.text = self.str_encoded
-
+        self.root.ids.fg.text = self.str_decoded
 
 
 Example().run()
