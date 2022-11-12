@@ -1,3 +1,4 @@
+import cryptocode
 from kivy.lang import Builder
 
 from kivymd.app import MDApp
@@ -34,6 +35,36 @@ MDScreen:
                     md_bg_color: "#e7e4c0"
                     specific_text_color: "#4a4939"
                     left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                    
+                MDTextField
+                    id: data
+                    multiline: True
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+                    
+                MDRectangleFlatIconButton
+                    icon: "send"
+                    text: "Шифровать"
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    on_press:app.btn_encode()
+                    
+                    
+                MDTextField
+                    id: dt
+                    multiline: True
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+                    
+                MDRectangleFlatIconButton
+                    icon: "send"
+                    text: "Получить"
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                    on_press:app.encode()
+                    
+                MDRectangleFlatIconButton
+                    icon: "send"
+                    text: "Расшифровать"
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+                    on_press:app.btn_decode()
+                    
 
         MDNavigationDrawer:
             id: nav_drawer
@@ -80,6 +111,21 @@ class Example(MDApp):
     def build(self):
         self.theme_cls.theme_style = "Dark"
         return Builder.load_string(KV)
+
+    def btn_encode(self):  # шифрование
+        self.str_encoded = cryptocode.encrypt(self.root.ids.data.text, "wow")
+        print(self.str_encoded)
+
+    def encode(self):  # шифрование
+        self.root.ids.dt.text = self.str_encoded
+
+    def btn_decode(self):
+        self.str_decoded = cryptocode.decrypt(self.str_encoded, "wow")
+        print(self.str_decoded)
+
+    def decode(self):  # шифрование
+        self.root.ids.dt.text = self.str_encoded
+
 
 
 Example().run()

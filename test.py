@@ -1,4 +1,4 @@
-import cryptocode
+"""import cryptocode
 from kivy.uix.textinput import TextInput
 from kivymd.app import MDApp
 from kivymd.uix.button import MDRectangleFlatIconButton
@@ -34,7 +34,6 @@ class Example(MDApp):
                                 halign="center",
                             ),
                             MDTextField(
-                                id="text_field_error",  #это то что я хочу
                                 multiline=True,
                                 hint_text="Введите текст",
                                 pos_hint={'center_x': 0.5, 'center_y': 0.7},
@@ -59,8 +58,8 @@ class Example(MDApp):
                                 halign="center",
                             ),
                             MDTextField(
-                                id='text_input_1',
                                 multiline=True,
+                                id='data',
                                 hint_text="Введите текст",
                                 pos_hint={'center_x': 0.5, 'center_y': 0.7},
                             ),
@@ -118,7 +117,9 @@ class Example(MDApp):
         self.root.children[0].ids.nav_drawer.set_state("close")
 
     def btn_encode(self, instance):  #это обработчик
-        print(self.root.ids.navigation_layout.text)
+        print(self.root.ids.data.text)
+
+
 
     def nav_drawer_open(self):
         nav_drawer = self.root.children[0].ids.nav_drawer
@@ -126,3 +127,4 @@ class Example(MDApp):
 
 
 Example().run()
+"""
