@@ -1,6 +1,5 @@
 import cryptocode
 from kivy.lang import Builder
-
 from kivymd.app import MDApp
 
 KV = '''
@@ -29,7 +28,7 @@ MDScreen:
             MDScreen:
 
                 MDTopAppBar:
-                    title: "Navigation Drawer"
+                    title: "Menu"
                     elevation: 4
                     pos_hint: {"top": 1}
                     md_bg_color: "#e7e4c0"
@@ -38,30 +37,33 @@ MDScreen:
                     
                 MDTextField
                     id: data
+                    hint_text: "Введите текс который хотите зашифровать"
                     multiline: True
                     pos_hint: {'center_x': 0.5, 'center_y': 0.7}
                     
                 MDRectangleFlatIconButton
                     icon: "send"
                     text: "Шифровать"
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    pos_hint: {'center_x': 0.1, 'center_y': 0.5}
                     on_press:app.btn_encode()
                     
                     
                 MDTextField
                     id: dt
+                    hint_text: "Введите шифрованный текс"
                     multiline: True
                     pos_hint: {'center_x': 0.5, 'center_y': 0.4}
                     
                 MDTextField
                     id: fg
+                    hint_text: "Ваш расшифрованный текст"
                     multiline: True
                     pos_hint: {'center_x': 0.5, 'center_y': 0.2}
                     
                 MDRectangleFlatIconButton
                     icon: "send"
                     text: "Расшифровать"
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+                    pos_hint: {'center_x': 0.1, 'center_y': 0.1}
                     on_press:app.btn_decode()
                     
 
@@ -94,6 +96,14 @@ MDScreen:
 
                 MDNavigationDrawerLabel:
                     text: "Labels"
+                
+                OneLineListItem:
+                    text: "RSA"
+                    on_press: self.switch_screen
+                
+                OneLineListItem
+                    text: "Аsymmetric method"
+                    on_press: self.switch_screen
 
                 DrawerLabelItem:
                     icon: "information-outline"
@@ -110,7 +120,7 @@ class Example(MDApp):
         self.theme_cls.theme_style = "Dark"
         return Builder.load_string(KV)
 
-    def btn_encode(self):  # шифрование
+    def btn_encode(self):
         self.str_encoded = cryptocode.encrypt(self.root.ids.data.text, "wow")
         self.root.ids.dt.text = self.str_encoded
 
